@@ -7,3 +7,6 @@
 [submodule "contracts/lib/light-account"]
 	path = contracts/lib/light-account
 	url = https://github.com/alchemyplatform/light-account
+[submodule "contracts/lib/safe-contracts"]
+	path = contracts/lib/safe-contracts
+	url = https://github.com/safe-global/safe-contracts
