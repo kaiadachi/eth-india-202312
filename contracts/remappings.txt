@@ -1,0 +1,4 @@
+@openzeppelin/=lib/openzeppelin-contracts/
+@openzeppelin-contracts-upgradeable/=lib/openzeppelin-contracts-upgradeable/
+@light-account/=lib/light-account/
+@safe/=lib/safe-contracts/
