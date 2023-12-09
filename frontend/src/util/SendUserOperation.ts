@@ -8,7 +8,7 @@ import {
 } from 'viem';
 import {signMessage} from 'viem/accounts';
 import {scrollSepolia} from 'viem/chains';
-import {erc7546Proxy, entryPoint} from './ScrollAddress';
+import {erc7546Proxy, entryPoint} from './BaseAddress';
 
 import {
     UserOperationRequest,

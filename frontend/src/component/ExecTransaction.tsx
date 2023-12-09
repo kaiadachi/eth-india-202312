@@ -12,7 +12,7 @@ import {
 import {
     erc7546Proxy,
     receiver
-} from '../util/ScrollAddress'
+} from '../util/BaseAddress'
 
 import {
     keccak256,

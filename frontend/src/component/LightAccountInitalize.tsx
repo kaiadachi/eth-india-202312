@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 
 import {account, walletClient} from "@/util/Config";
-import {erc7546Proxy} from "@/util/ScrollAddress";
+import {erc7546Proxy} from "@/util/BaseAddress";
 import {LightAccountAbi} from "@/abi/LightAccountAbi";
 
 export default function LightAccountInitalize() {
