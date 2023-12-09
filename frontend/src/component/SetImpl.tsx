@@ -1,8 +1,7 @@
-import React, {useState, useEffect} from 'react';
-import {Address, createPublicClient, createWalletClient, http} from 'viem';
+import React, {useState} from 'react';
+import {Address} from 'viem';
 import {DictionaryAbi} from '../abi/DictionaryAbi';
 import {walletClient, dictionary, lightAccountImpl, safeImpl, publicClient} from '../util/Config';
-import {goerli} from "viem/chains";
 
 export default function SetImpl() {
     const [functionSelector, setFunctionSelector] = useState('');

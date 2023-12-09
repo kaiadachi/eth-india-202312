@@ -1,9 +1,14 @@
 export const SafeAbi = [
     {
+        inputs: [],
+        stateMutability: "nonpayable",
+        type: "constructor"
+    },
+    {
         anonymous: false,
         inputs: [
             {
-                indexed: false,
+                indexed: true,
                 internalType: "address",
                 name: "owner",
                 type: "address"
@@ -35,7 +40,7 @@ export const SafeAbi = [
         anonymous: false,
         inputs: [
             {
-                indexed: false,
+                indexed: true,
                 internalType: "address",
                 name: "handler",
                 type: "address"
@@ -48,7 +53,7 @@ export const SafeAbi = [
         anonymous: false,
         inputs: [
             {
-                indexed: false,
+                indexed: true,
                 internalType: "address",
                 name: "guard",
                 type: "address"
@@ -74,7 +79,7 @@ export const SafeAbi = [
         anonymous: false,
         inputs: [
             {
-                indexed: false,
+                indexed: true,
                 internalType: "address",
                 name: "module",
                 type: "address"
@@ -87,7 +92,7 @@ export const SafeAbi = [
         anonymous: false,
         inputs: [
             {
-                indexed: false,
+                indexed: true,
                 internalType: "address",
                 name: "module",
                 type: "address"
@@ -100,7 +105,7 @@ export const SafeAbi = [
         anonymous: false,
         inputs: [
             {
-                indexed: false,
+                indexed: true,
                 internalType: "bytes32",
                 name: "txHash",
                 type: "bytes32"
@@ -145,7 +150,7 @@ export const SafeAbi = [
         anonymous: false,
         inputs: [
             {
-                indexed: false,
+                indexed: true,
                 internalType: "bytes32",
                 name: "txHash",
                 type: "bytes32"
@@ -164,123 +169,13 @@ export const SafeAbi = [
         anonymous: false,
         inputs: [
             {
-                indexed: false,
+                indexed: true,
                 internalType: "address",
                 name: "owner",
                 type: "address"
             }
         ],
         name: "RemovedOwner",
-        type: "event"
-    },
-    {
-        anonymous: false,
-        inputs: [
-            {
-                indexed: false,
-                internalType: "address",
-                name: "module",
-                type: "address"
-            },
-            {
-                indexed: false,
-                internalType: "address",
-                name: "to",
-                type: "address"
-            },
-            {
-                indexed: false,
-                internalType: "uint256",
-                name: "value",
-                type: "uint256"
-            },
-            {
-                indexed: false,
-                internalType: "bytes",
-                name: "data",
-                type: "bytes"
-            },
-            {
-                indexed: false,
-                internalType: "enum Enum.Operation",
-                name: "operation",
-                type: "uint8"
-            }
-        ],
-        name: "SafeModuleTransaction",
-        type: "event"
-    },
-    {
-        anonymous: false,
-        inputs: [
-            {
-                indexed: false,
-                internalType: "address",
-                name: "to",
-                type: "address"
-            },
-            {
-                indexed: false,
-                internalType: "uint256",
-                name: "value",
-                type: "uint256"
-            },
-            {
-                indexed: false,
-                internalType: "bytes",
-                name: "data",
-                type: "bytes"
-            },
-            {
-                indexed: false,
-                internalType: "enum Enum.Operation",
-                name: "operation",
-                type: "uint8"
-            },
-            {
-                indexed: false,
-                internalType: "uint256",
-                name: "safeTxGas",
-                type: "uint256"
-            },
-            {
-                indexed: false,
-                internalType: "uint256",
-                name: "baseGas",
-                type: "uint256"
-            },
-            {
-                indexed: false,
-                internalType: "uint256",
-                name: "gasPrice",
-                type: "uint256"
-            },
-            {
-                indexed: false,
-                internalType: "address",
-                name: "gasToken",
-                type: "address"
-            },
-            {
-                indexed: false,
-                internalType: "address payable",
-                name: "refundReceiver",
-                type: "address"
-            },
-            {
-                indexed: false,
-                internalType: "bytes",
-                name: "signatures",
-                type: "bytes"
-            },
-            {
-                indexed: false,
-                internalType: "bytes",
-                name: "additionalInfo",
-                type: "bytes"
-            }
-        ],
-        name: "SafeMultiSigTransaction",
         type: "event"
     },
     {
@@ -357,7 +252,7 @@ export const SafeAbi = [
         type: "fallback"
     },
     {
-        inputs: [ ],
+        inputs: [],
         name: "VERSION",
         outputs: [
             {
@@ -383,7 +278,7 @@ export const SafeAbi = [
             }
         ],
         name: "addOwnerWithThreshold",
-        outputs: [ ],
+        outputs: [],
         stateMutability: "nonpayable",
         type: "function"
     },
@@ -396,7 +291,7 @@ export const SafeAbi = [
             }
         ],
         name: "approveHash",
-        outputs: [ ],
+        outputs: [],
         stateMutability: "nonpayable",
         type: "function"
     },
@@ -433,7 +328,7 @@ export const SafeAbi = [
             }
         ],
         name: "changeThreshold",
-        outputs: [ ],
+        outputs: [],
         stateMutability: "nonpayable",
         type: "function"
     },
@@ -461,7 +356,7 @@ export const SafeAbi = [
             }
         ],
         name: "checkNSignatures",
-        outputs: [ ],
+        outputs: [],
         stateMutability: "view",
         type: "function"
     },
@@ -484,7 +379,7 @@ export const SafeAbi = [
             }
         ],
         name: "checkSignatures",
-        outputs: [ ],
+        outputs: [],
         stateMutability: "view",
         type: "function"
     },
@@ -502,12 +397,12 @@ export const SafeAbi = [
             }
         ],
         name: "disableModule",
-        outputs: [ ],
+        outputs: [],
         stateMutability: "nonpayable",
         type: "function"
     },
     {
-        inputs: [ ],
+        inputs: [],
         name: "domainSeparator",
         outputs: [
             {
@@ -528,7 +423,7 @@ export const SafeAbi = [
             }
         ],
         name: "enableModule",
-        outputs: [ ],
+        outputs: [],
         stateMutability: "nonpayable",
         type: "function"
     },
@@ -653,7 +548,7 @@ export const SafeAbi = [
         outputs: [
             {
                 internalType: "bool",
-                name: "",
+                name: "success",
                 type: "bool"
             }
         ],
@@ -734,7 +629,7 @@ export const SafeAbi = [
         type: "function"
     },
     {
-        inputs: [ ],
+        inputs: [],
         name: "getChainId",
         outputs: [
             {
@@ -776,7 +671,7 @@ export const SafeAbi = [
         type: "function"
     },
     {
-        inputs: [ ],
+        inputs: [],
         name: "getOwners",
         outputs: [
             {
@@ -813,7 +708,7 @@ export const SafeAbi = [
         type: "function"
     },
     {
-        inputs: [ ],
+        inputs: [],
         name: "getThreshold",
         outputs: [
             {
@@ -928,7 +823,7 @@ export const SafeAbi = [
         type: "function"
     },
     {
-        inputs: [ ],
+        inputs: [],
         name: "nonce",
         outputs: [
             {
@@ -959,41 +854,7 @@ export const SafeAbi = [
             }
         ],
         name: "removeOwner",
-        outputs: [ ],
-        stateMutability: "nonpayable",
-        type: "function"
-    },
-    {
-        inputs: [
-            {
-                internalType: "address",
-                name: "to",
-                type: "address"
-            },
-            {
-                internalType: "uint256",
-                name: "value",
-                type: "uint256"
-            },
-            {
-                internalType: "bytes",
-                name: "data",
-                type: "bytes"
-            },
-            {
-                internalType: "enum Enum.Operation",
-                name: "operation",
-                type: "uint8"
-            }
-        ],
-        name: "requiredTxGas",
-        outputs: [
-            {
-                internalType: "uint256",
-                name: "",
-                type: "uint256"
-            }
-        ],
+        outputs: [],
         stateMutability: "nonpayable",
         type: "function"
     },
@@ -1006,7 +867,7 @@ export const SafeAbi = [
             }
         ],
         name: "setFallbackHandler",
-        outputs: [ ],
+        outputs: [],
         stateMutability: "nonpayable",
         type: "function"
     },
@@ -1019,7 +880,7 @@ export const SafeAbi = [
             }
         ],
         name: "setGuard",
-        outputs: [ ],
+        outputs: [],
         stateMutability: "nonpayable",
         type: "function"
     },
@@ -1067,7 +928,7 @@ export const SafeAbi = [
             }
         ],
         name: "setup",
-        outputs: [ ],
+        outputs: [],
         stateMutability: "nonpayable",
         type: "function"
     },
@@ -1104,7 +965,7 @@ export const SafeAbi = [
             }
         ],
         name: "simulateAndRevert",
-        outputs: [ ],
+        outputs: [],
         stateMutability: "nonpayable",
         type: "function"
     },
@@ -1127,7 +988,7 @@ export const SafeAbi = [
             }
         ],
         name: "swapOwner",
-        outputs: [ ],
+        outputs: [],
         stateMutability: "nonpayable",
         type: "function"
     },

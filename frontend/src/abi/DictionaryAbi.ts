@@ -89,6 +89,19 @@ export const DictionaryAbi = [
                 type: "bytes4"
             }
         ],
+        name: "deleteImplementation",
+        outputs: [],
+        stateMutability: "nonpayable",
+        type: "function"
+    },
+    {
+        inputs: [
+            {
+                internalType: "bytes4",
+                name: "functionSelector",
+                type: "bytes4"
+            }
+        ],
         name: "getImplementation",
         outputs: [
             {
