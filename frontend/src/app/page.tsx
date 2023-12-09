@@ -11,7 +11,7 @@ export default function Home() {
                 AccountAbstraction <strong>and</strong> Multisig.</p>
             <ul>
                 <li>
-                    <span>Create ERC-7546 Proxy(<a href="https://github.com/ethereum/ERCs/blob/9d1e9da45bf21212dc7de63483da967b96fadd7e/ERCS/erc-7546.md">What is ERC-7546?</a>)</span><br/>
+                    <span>Create ERC-7546 Proxy</span><br/>
                     <Link href="/proxy">Proxy</Link><br/>
                 </li>
                 <li>

@@ -4,12 +4,15 @@ import {SafeAbi} from '../abi/SafeAbi';
 import {
     walletClient,
     publicClient,
-    erc7546Proxy,
     account,
     zeroAddress,
-    PRIVATE_KEY,
-    receiver
+    PRIVATE_KEY
 } from '../util/Config';
+
+import {
+    erc7546Proxy,
+    receiver
+} from '../util/ScrollAddress'
 
 import {
     keccak256,

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Address } from 'viem';
 import { DictionaryAbi } from '../abi/DictionaryAbi';
-import { walletClient, dictionary, lightAccountImpl, safeImpl, publicClient } from '../util/Config';
+import { walletClient, publicClient } from '../util/Config';
+import { dictionary, lightAccountImpl, safeImpl } from '../util/ScrollAddress';
 
 export default function SetImpl() {
     const [functionSelector, setFunctionSelector] = useState('');

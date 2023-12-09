@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {ERC7546ProxyAbi} from '../abi/ERC7546ProxyAbi';
-import {walletClient, dictionary} from '../util/Config'
+import {walletClient} from '../util/Config'
+import {dictionary} from '../util/ScrollAddress'
 
 export default function CreateERC7546Proxy() {
     const [deployHash, setDeployHash] = useState('');
