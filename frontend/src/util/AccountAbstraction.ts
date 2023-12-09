@@ -9,7 +9,8 @@ import {
 
 import {Chain} from 'viem/chains';
 import {EntryPointAbi} from '../abi/EntryPointAbi';
-import {entryPoint, publicClient} from './Config';
+import {publicClient} from './Config';
+import {entryPoint} from './ScrollAddress';
 
 
 import {
