@@ -81,20 +81,20 @@ export default function SetImpl() {
                 </button>
             </div>
 
-            <h2>Delete Implementation</h2>
-            <div>
-                <div>
-                    <label>Function Selector to Delete:</label>
-                    <input
-                        type="text"
-                        value={functionSelectorToDelete}
-                        onChange={(e) => setFunctionSelectorToDelete(e.target.value)}
-                    />
-                </div>
-                <button onClick={deleteImpl} disabled={isDeleting}>
-                    {isDeleting ? 'Processing...' : 'Delete Implementation'}
-                </button>
-            </div>
+            {/*<h2>Delete Implementation</h2>*/}
+            {/*<div>*/}
+            {/*    <div>*/}
+            {/*        <label>Function Selector to Delete:</label>*/}
+            {/*        <input*/}
+            {/*            type="text"*/}
+            {/*            value={functionSelectorToDelete}*/}
+            {/*            onChange={(e) => setFunctionSelectorToDelete(e.target.value)}*/}
+            {/*        />*/}
+            {/*    </div>*/}
+            {/*    <button onClick={deleteImpl} disabled={isDeleting}>*/}
+            {/*        {isDeleting ? 'Processing...' : 'Delete Implementation'}*/}
+            {/*    </button>*/}
+            {/*</div>*/}
 
             {supportedInterfaces.length > 0 && (
                 <div>

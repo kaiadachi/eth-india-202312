@@ -23,7 +23,7 @@ export default function ExecuteUserOperation() {
             <div>
                 <h2>Send UserOperation</h2>
                 <label>
-                    Target Address:
+                    To:
                     <input
                         type="text"
                         placeholder="Target Address"

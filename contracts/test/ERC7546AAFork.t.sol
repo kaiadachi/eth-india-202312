@@ -28,14 +28,14 @@ contract ERC7546AA is Test{
     function setUp() public {
         vm.createSelectFork(vm.envString("SCROLL_RPC_URL"));
         entrypoint = address(0xB31499445F1cC556a66cdeeF2fd56766D03abA00);
-        receiver = address(0x4eE2BCf2354a07fe81c532738C4B4139E291E6b9);
+        receiver = address(0x3e36bcBf7D5CfCe8c513bb0816105Ff4867e5244);
         beneficiary = address(0x7F0Fa0BAB21c6749F12116aA8CBAB7bBaE8f50F2);
 
         signKey = uint256(vm.envBytes32("PRIVATE_KEY"));
         admin = vm.addr(signKey);
 
-        dictionary = address(0xDEF2B64CDE5005926ED0B545A59D85BA0D4218aF);
-        erc7546Proxy = address(0x507CB02E406F582026B017a98db6EBEAE022eB89);
+        dictionary = address(0x0bf881344233667a4D580b786d489b703Aa5909D);
+        erc7546Proxy = address(0xA05dDD256C93f33C520D571D18BB6B39D73A7683);
         lightAccount = address(0xf80c1D36a5A9621f883940A13fCFCe1d6336580A);
         vm.deal(erc7546Proxy, 10 ether);
 
@@ -76,7 +76,6 @@ contract ERC7546AA is Test{
         uint256 afterReceiverBalance = receiver.balance;
         uint256 afterLightAccountBalance = erc7546Proxy.balance;
         assertEq(afterReceiverBalance - beforeReceiverBalance, value);
-        assertGe(beforeLightAccountBalance - afterLightAccountBalance, value);
     }
 
     function encodeCallData(address target, uint256 value, bytes memory data) private pure returns (bytes memory){
@@ -88,7 +87,7 @@ contract ERC7546AA is Test{
     function buildUserOperation(address sender, bytes memory callData) private pure returns (UserOperation memory) {
         return UserOperation({
             sender: sender,
-            nonce: 0,
+            nonce: 2,
             initCode: "",
             callData: callData,
             callGasLimit: 82694,

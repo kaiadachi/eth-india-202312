@@ -12,8 +12,8 @@ contract DeployAA is Script {
         address admin = vm.addr(deployerPrivateKey);
         vm.startBroadcast(deployerPrivateKey);
 
-        address dictionary = address(new Dictionary(admin));
-        new ERC7546Proxy(dictionary, "");
+        Dictionary dictionary = new Dictionary(admin);
+        new ERC7546Proxy(address(dictionary), "");
 
         vm.stopBroadcast();
     }

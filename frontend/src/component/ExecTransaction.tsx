@@ -53,6 +53,10 @@ export default function SetImpl() {
     const [setupHash, setSetupHash] = useState('');
     const [transactionHash, setTransactionHash] = useState('');
 
+    const [to, setTo] = useState('');
+    const [value, setValue] = useState(0);
+    const [data, setData] = useState('');
+
     const setup = async () => {
         setIsSettingUp(true);
         try {
@@ -71,9 +75,6 @@ export default function SetImpl() {
     const execTransaction = async () => {
         setIsExecutingTransaction(true);
         try {
-            const to = receiver;
-            const value = BigInt(20);
-            const data = "0x";
             const operation = 0;
             const safeTxGas = BigInt(0);
             const baseGas = BigInt(0);
@@ -90,7 +91,7 @@ export default function SetImpl() {
                 address: erc7546Proxy,
                 abi: SafeAbi,
                 functionName: 'encodeTransactionData',
-                args: [to, value, data, operation, safeTxGas, baseGas, gasPrice, gasToken, refundReceiver, nonce]
+                args: [to as Address, BigInt(value), data as `0x{string}`, operation, safeTxGas, baseGas, gasPrice, gasToken, refundReceiver, nonce]
             });
 
             const hash = keccak256(txHash);
@@ -108,7 +109,7 @@ export default function SetImpl() {
                 address: erc7546Proxy,
                 abi: SafeAbi,
                 functionName: 'execTransaction',
-                args: [to, value, data, operation, safeTxGas, baseGas, gasPrice, gasToken, refundReceiver, packedSignature]
+                args: [to as Address, BigInt(value), data as `0x{string}`, operation, safeTxGas, baseGas, gasPrice, gasToken, refundReceiver, packedSignature]
             });
             setTransactionHash(txH);
         } catch (error) {
@@ -124,6 +125,24 @@ export default function SetImpl() {
                 {isSettingUp ? 'Setting up...' : 'Setup Safe'}
             </button>
             {setupHash && <p>Setup Hash: {setupHash}</p>}
+
+            <div>
+                <label>
+                    To:
+                    <input type="text" value={to} onChange={(e) => setTo(e.target.value as Address)}/>
+                </label>
+                <br/>
+                <label>
+                    Data:
+                    <input type="text" value={data} onChange={(e) => setData(e.target.value)}/>
+                </label>
+                <label>
+                    Value:
+                    <input type="number" value={value} onChange={(e) => setValue(e.target.valueAsNumber)}/>
+                </label>
+                <br/>
+                <br/>
+            </div>
 
             <button onClick={execTransaction} disabled={isExecutingTransaction}>
                 {isExecutingTransaction ? 'Executing...' : 'Execute Transaction'}
