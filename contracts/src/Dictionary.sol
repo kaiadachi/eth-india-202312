@@ -59,6 +59,11 @@ contract Dictionary is IDictionary {
         emit ImplementationUpgraded(functionSelector, implementation);
     }
 
+    function deleteImplementation(bytes4 functionSelector) external onlyAdmin {
+        delete implementations[functionSelector];
+        emit ImplementationUpgraded(functionSelector, address(0));
+    }
+
     /**
      * @notice Specification 3.1.1.1
      * @dev The interfaceId equals to the function selector

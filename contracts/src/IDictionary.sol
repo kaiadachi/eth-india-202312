@@ -21,5 +21,6 @@ interface IDictionary is IERC165 {
      */
     function getImplementation(bytes4 functionSelector) external view returns (address);
     function setImplementation(bytes4 functionSelector, address implementation) external;
+    function deleteImplementation(bytes4 functionSelector) external;
     function supportsInterfaces() external returns (bytes4[] memory);
 }
