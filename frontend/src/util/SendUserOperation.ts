@@ -7,8 +7,8 @@ import {
     SignableMessage,
 } from 'viem';
 import {signMessage} from 'viem/accounts';
-import {goerli} from 'viem/chains';
-import {lightAccountProxy, entryPoint} from './Config';
+import {scrollSepolia} from 'viem/chains';
+import {erc7546Proxy, entryPoint} from './Config';
 
 import {
     UserOperationRequest,
@@ -19,6 +19,7 @@ import {
     deepHexlify
 } from './AccountAbstraction';
 import {walletClient, PRIVATE_KEY} from './Config'
+import {createServerOnlyClientOnlyAliases} from "next/dist/build/create-compiler-aliases";
 
 interface props {
     target: Address;
@@ -33,7 +34,7 @@ export default function SendUserOperation({target, data, value, onResult}: props
     const [contractResult, setContractResult] = useState<string>("");
     const fetchNonce = async () => {
         try {
-            const result = await entryPointContract().read.getNonce([lightAccountProxy, BigInt(0)]);
+            const result = await entryPointContract().read.getNonce([erc7546Proxy, BigInt(0)]);
             setNonce(result);
         } catch (error) {
             console.error('Error fetching nonce:', error);
@@ -42,9 +43,10 @@ export default function SendUserOperation({target, data, value, onResult}: props
     const createUserOperation = async () => {
         try {
             const encoded = encodedCallData(target, data, BigInt(value));
-            const userOp = buildUserOperation(lightAccountProxy, encoded, nonce);
+            const userOp = buildUserOperation(erc7546Proxy, encoded, nonce);
             const hexified: UserOperationRequest = deepHexlify(userOp);
-            const hashUo = getUserOperationHash(hexified, entryPoint, BigInt(goerli.id));
+            const hashUo = getUserOperationHash(hexified, entryPoint, BigInt(scrollSepolia.id));
+            console.log(hashUo);
             const msg = hexToBytes(hashUo as Hex);
             const signableMessage: SignableMessage = {raw: msg};
             const sig = await signMessage({message: signableMessage, privateKey: PRIVATE_KEY});

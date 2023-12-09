@@ -63,7 +63,7 @@ export default function ExecuteUserOperation() {
                     onResult={handleResult}
                 />
             }
-            {contractResult && <div>実行結果: {contractResult}</div>}
+            {contractResult && <div>result: {contractResult}</div>}
         </>
     );
 }

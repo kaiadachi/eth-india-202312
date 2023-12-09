@@ -6,8 +6,8 @@ import {
     GetContractReturnType,
     PublicClient,
 } from 'viem';
-import {signMessage, privateKeyToAccount} from 'viem/accounts';
-import {goerli, Chain} from 'viem/chains';
+
+import {Chain} from 'viem/chains';
 import {EntryPointAbi} from '../abi/EntryPointAbi';
 import {entryPoint, publicClient} from './Config';
 
@@ -73,11 +73,11 @@ export const buildUserOperation = (sender: Address, callData: string, nonce: big
         nonce: nonce,
         initCode: '',
         callData: callData,
-        callGasLimit: BigInt(163840),
-        verificationGasLimit: BigInt(2048000),
-        preVerificationGas: BigInt(45720),
-        maxFeePerGas: BigInt(14),
-        maxPriorityFeePerGas: BigInt(2),
+        callGasLimit: BigInt(82694),
+        verificationGasLimit: BigInt(204800),
+        preVerificationGas: BigInt(51768),
+        maxFeePerGas: BigInt(473516112),
+        maxPriorityFeePerGas: BigInt(473516112),
         paymasterAndData: '',
         signature: toHex('0xfffffffffffffffffffffffffffffff0000000000000000000000000000000007aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1c'),
     };

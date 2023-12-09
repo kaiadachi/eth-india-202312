@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import SendUserOperation from '../util/SendUserOperation';
 import { Address, Hex } from 'viem';
-import { account, entryPoint, lightAccountProxy, walletClient, zeroAddress } from "@/util/Config";
+import { account, entryPoint, erc7546Proxy, walletClient, zeroAddress } from "@/util/Config";
 import { LightAccountAbi } from "@/abi/LightAccountAbi";
 
 export default function LightAccountInitalize() {
@@ -10,7 +10,7 @@ export default function LightAccountInitalize() {
     const initialize = async () => {
         try {
             await walletClient.writeContract({
-                address: lightAccountProxy,
+                address: erc7546Proxy,
                 abi: LightAccountAbi,
                 functionName: 'initialize',
                 args: [account.address]

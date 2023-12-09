@@ -4,7 +4,7 @@ import {SafeAbi} from '../abi/SafeAbi';
 import {
     walletClient,
     publicClient,
-    lightAccountProxy,
+    erc7546Proxy,
     account,
     zeroAddress,
     PRIVATE_KEY,
@@ -52,7 +52,7 @@ export default function SetImpl() {
         setIsSettingUp(true);
         try {
             await walletClient.writeContract({
-                address: lightAccountProxy,
+                address: erc7546Proxy,
                 abi: SafeAbi,
                 functionName: 'setup',
                 args: [[account.address], BigInt(1), zeroAddress, "0x", zeroAddress, zeroAddress, BigInt(0), zeroAddress]
@@ -75,13 +75,13 @@ export default function SetImpl() {
             const gasToken = zeroAddress;
             const refundReceiver = zeroAddress;
             const nonce = await publicClient.readContract({
-                address: lightAccountProxy,
+                address: erc7546Proxy,
                 abi: SafeAbi,
                 functionName: 'nonce',
             });
 
             const txHash = await publicClient.readContract({
-                address: lightAccountProxy,
+                address: erc7546Proxy,
                 abi: SafeAbi,
                 functionName: 'encodeTransactionData',
                 args: [to, value, data, operation, safeTxGas, baseGas, gasPrice, gasToken, refundReceiver, nonce]
@@ -99,7 +99,7 @@ export default function SetImpl() {
             const packedSignature = ethers.solidityPacked(['bytes32', 'bytes32', 'uint8'], [r, s, v]) as `0x{string}`;
 
             const txH = await walletClient.writeContract({
-                address: lightAccountProxy,
+                address: erc7546Proxy,
                 abi: SafeAbi,
                 functionName: 'execTransaction',
                 args: [to, value, data, operation, safeTxGas, baseGas, gasPrice, gasToken, refundReceiver, packedSignature]

@@ -18,7 +18,7 @@ export const publicClient = createPublicClient({
     chain: scrollSepolia,
     transport: http()
 });
-export const lightAccountProxy = "0x507CB02E406F582026B017a98db6EBEAE022eB89";
+export const erc7546Proxy = "0x507CB02E406F582026B017a98db6EBEAE022eB89";
 export const lightAccountImpl = "0xf80c1D36a5A9621f883940A13fCFCe1d6336580A";
 export const entryPoint = "0xB31499445F1cC556a66cdeeF2fd56766D03abA00";
 export const dictionary = "0xDEF2B64CDE5005926ED0B545A59D85BA0D4218aF";
