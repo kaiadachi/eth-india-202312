@@ -20,7 +20,6 @@ export default function ExecuteUserOperation() {
 
     return (
         <>
-            <h1>Account Abstraction</h1>
             <div>
                 <h2>Send UserOperation</h2>
                 <label>
@@ -55,7 +54,7 @@ export default function ExecuteUserOperation() {
                     />
                 </label>
             </div>
-            <button onClick={handleSubmit}>実行</button>
+            <button onClick={handleSubmit}>sendUserOperation</button>
             {execute &&
                 <SendUserOperation
                     target={target as Address}

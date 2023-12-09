@@ -17,8 +17,6 @@ import {
 } from "viem";
 
 import {ethers} from 'ethers';
-import {arrayify} from "@ethersproject/bytes";
-import {signMessage} from "viem/accounts";
 
 interface SafeTx {
     to: string,
