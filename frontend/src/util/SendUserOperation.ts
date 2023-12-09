@@ -7,7 +7,7 @@ import {
     SignableMessage,
 } from 'viem';
 import {signMessage} from 'viem/accounts';
-import {scrollSepolia} from 'viem/chains';
+import {baseGoerli} from 'viem/chains';
 import {erc7546Proxy, entryPoint} from './BaseAddress';
 
 import {
@@ -45,7 +45,7 @@ export default function SendUserOperation({target, data, value, onResult}: props
             const encoded = encodedCallData(target, data, BigInt(value));
             const userOp = buildUserOperation(erc7546Proxy, encoded, nonce);
             const hexified: UserOperationRequest = deepHexlify(userOp);
-            const hashUo = getUserOperationHash(hexified, entryPoint, BigInt(scrollSepolia.id));
+            const hashUo = getUserOperationHash(hexified, entryPoint, BigInt(baseGoerli.id));
             console.log(hashUo);
             const msg = hexToBytes(hashUo as Hex);
             const signableMessage: SignableMessage = {raw: msg};
