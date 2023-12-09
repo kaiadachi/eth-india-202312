@@ -1,16 +1,16 @@
-import React, {useState} from 'react';
-import {Address} from 'viem';
-import {DictionaryAbi} from '../abi/DictionaryAbi';
-import {walletClient, dictionary, lightAccountImpl, safeImpl, publicClient} from '../util/Config';
+import React, { useState } from 'react';
+import { Address } from 'viem';
+import { DictionaryAbi } from '../abi/DictionaryAbi';
+import { walletClient, dictionary, lightAccountImpl, safeImpl, publicClient } from '../util/Config';
 
 export default function SetImpl() {
     const [functionSelector, setFunctionSelector] = useState('');
     const [targetImpl, setTargetImpl] = useState('');
     const [supportedInterfaces, setSupportedInterfaces] = useState([]);
     const [functionSelectorToDelete, setFunctionSelectorToDelete] = useState('');
-    const [isUpdating, setIsUpdating] = useState(false);
+    const [isSettingUp, setIsSettingUp] = useState(false);
+    const [isDeleting, setIsDeleting] = useState(false);
 
-    // supportsInterfacesを独立した関数として定義
     const fetchSupportedInterfaces = async () => {
         const data = await publicClient.readContract({
             address: dictionary,
@@ -18,27 +18,27 @@ export default function SetImpl() {
             functionName: 'supportsInterfaces',
         });
         // @ts-ignore
-        setSupportedInterfaces([...data]);
+        setSupportedInterfaces([...data].filter(interfaceName => interfaceName !== '0'));
     };
 
-
     const setImpl = async () => {
-        setIsUpdating(true);
+        setIsSettingUp(true);
         try {
-            await walletClient.writeContract({
+            const txResponse  = await walletClient.writeContract({
                 address: dictionary,
                 abi: DictionaryAbi,
                 functionName: 'setImplementation',
                 args: [functionSelector as `0x{string}`, targetImpl as Address]
             });
-            await fetchSupportedInterfaces(); // supportsInterfacesを呼び出して一覧を更新
+            await fetchSupportedInterfaces();
         } catch (error) {
             console.error("An error occurred during the setup process:", error);
         }
-        setIsUpdating(false);
+        setIsSettingUp(false);
     };
+
     const deleteImpl = async () => {
-        setIsUpdating(true);
+        setIsDeleting(true);
         try {
             await walletClient.writeContract({
                 address: dictionary,
@@ -50,13 +50,13 @@ export default function SetImpl() {
         } catch (error) {
             console.error("An error occurred during the delete process:", error);
         }
-        setIsUpdating(false);
+        setIsDeleting(false);
     };
-
 
     return (
         <>
             <h1>Dictionary</h1>
+
             <h2>Set Implementation</h2>
             <div>
                 <div>
@@ -75,37 +75,38 @@ export default function SetImpl() {
                         onChange={(e) => setTargetImpl(e.target.value)}
                     />
                 </div>
-                <button onClick={setImpl} disabled={isUpdating}>
-                    {isUpdating ? 'Processing...' : 'Setup Implementation'}
+                <button onClick={setImpl} disabled={isSettingUp}>
+                    {isSettingUp ? 'Processing...' : 'Setup Implementation'}
                 </button>
             </div>
 
-
             <h2>Delete Implementation</h2>
             <div>
-                <label>Function Selector to Delete:</label>
-                <input
-                    type="text"
-                    value={functionSelectorToDelete}
-                    onChange={(e) => setFunctionSelectorToDelete(e.target.value)}
-                />
+                <div>
+                    <label>Function Selector to Delete:</label>
+                    <input
+                        type="text"
+                        value={functionSelectorToDelete}
+                        onChange={(e) => setFunctionSelectorToDelete(e.target.value)}
+                    />
+                </div>
+                <button onClick={deleteImpl} disabled={isDeleting}>
+                    {isDeleting ? 'Processing...' : 'Delete Implementation'}
+                </button>
             </div>
-            <button onClick={deleteImpl} disabled={isUpdating}>
-                {isUpdating ? 'Processing...' : 'Delete Implementation'}
-            </button>
 
             {supportedInterfaces.length > 0 && (
                 <div>
                     <h2>Supported Interfaces:</h2>
                     <ul>
                         {supportedInterfaces.map((interfaceName, index) => (
-                            <li key={index}>{interfaceName}</li>
+                            interfaceName !== '0x00000000' && <li key={index}>{interfaceName}</li>
                         ))}
                     </ul>
                 </div>
             )}
 
-            <br/>
+            <br />
             <h2>Memo</h2>
             <h3>AccountAbstraction</h3>
             <ul>

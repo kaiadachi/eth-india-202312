@@ -1,6 +1,6 @@
 #!/bin/sh
 
-forge script ./script/DeploySafe.s.sol \
+forge script ./script/DeployDict.s.sol \
 --chain-id 534351 \
 --rpc-url https://sepolia-rpc.scroll.io \
 --verifier-url https://api-sepolia.scrollscan.com/api \
