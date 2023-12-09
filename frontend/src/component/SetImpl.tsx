@@ -7,28 +7,52 @@ export default function SetImpl() {
     const [functionSelector, setFunctionSelector] = useState('');
     const [targetImpl, setTargetImpl] = useState('');
     const [supportedInterfaces, setSupportedInterfaces] = useState([]);
-    const [showSupportedInterfaces, setShowSupportedInterfaces] = useState(false);
+    const [functionSelectorToDelete, setFunctionSelectorToDelete] = useState('');
+    const [isUpdating, setIsUpdating] = useState(false);
 
-    const setImpl = async () => {
-        // 実行するたびに新しいトランザクションを発行
-        const writeTxResponse = await walletClient.writeContract({
-            address: dictionary,
-            abi: DictionaryAbi,
-            functionName: 'setImplementation',
-            args: [functionSelector as `0x{string}`, targetImpl as Address]
-        });
-
-
+    // supportsInterfacesを独立した関数として定義
+    const fetchSupportedInterfaces = async () => {
         const data = await publicClient.readContract({
             address: dictionary,
             abi: DictionaryAbi,
             functionName: 'supportsInterfaces',
         });
-
         // @ts-ignore
         setSupportedInterfaces([...data]);
-        setShowSupportedInterfaces(true);
     };
+
+
+    const setImpl = async () => {
+        setIsUpdating(true);
+        try {
+            await walletClient.writeContract({
+                address: dictionary,
+                abi: DictionaryAbi,
+                functionName: 'setImplementation',
+                args: [functionSelector as `0x{string}`, targetImpl as Address]
+            });
+            await fetchSupportedInterfaces(); // supportsInterfacesを呼び出して一覧を更新
+        } catch (error) {
+            console.error("An error occurred during the setup process:", error);
+        }
+        setIsUpdating(false);
+    };
+    const deleteImpl = async () => {
+        setIsUpdating(true);
+        try {
+            await walletClient.writeContract({
+                address: dictionary,
+                abi: DictionaryAbi,
+                functionName: 'deleteImplementation',
+                args: [functionSelectorToDelete as `0x{string}`]
+            });
+            await fetchSupportedInterfaces();
+        } catch (error) {
+            console.error("An error occurred during the delete process:", error);
+        }
+        setIsUpdating(false);
+    };
+
 
     return (
         <>
@@ -51,9 +75,26 @@ export default function SetImpl() {
                         onChange={(e) => setTargetImpl(e.target.value)}
                     />
                 </div>
-                <button onClick={setImpl}>Execute</button>
+                <button onClick={setImpl} disabled={isUpdating}>
+                    {isUpdating ? 'Processing...' : 'Setup Implementation'}
+                </button>
             </div>
-            {showSupportedInterfaces && ( // 読み取りが完了したら表示
+
+
+            <h2>Delete Implementation</h2>
+            <div>
+                <label>Function Selector to Delete:</label>
+                <input
+                    type="text"
+                    value={functionSelectorToDelete}
+                    onChange={(e) => setFunctionSelectorToDelete(e.target.value)}
+                />
+            </div>
+            <button onClick={deleteImpl} disabled={isUpdating}>
+                {isUpdating ? 'Processing...' : 'Delete Implementation'}
+            </button>
+
+            {supportedInterfaces.length > 0 && (
                 <div>
                     <h2>Supported Interfaces:</h2>
                     <ul>
@@ -63,6 +104,7 @@ export default function SetImpl() {
                     </ul>
                 </div>
             )}
+
             <br/>
             <h2>Memo</h2>
             <h3>AccountAbstraction</h3>
@@ -76,7 +118,7 @@ export default function SetImpl() {
             <h3>Multisig</h3>
             <ul>
                 <li>address SafeImpl: {safeImpl}</li>
-                <li>bytes4 setUp: 0xb63e800d</li>
+                <li>bytes4 setup: 0xb63e800d</li>
                 <li>bytes4 nonce: 0xaffed0e0</li>
                 <li>bytes4 execTransaction: 0x6a761202</li>
                 <li>bytes4 encodeTransactionData: 0xe86637db</li>

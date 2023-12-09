@@ -47,16 +47,19 @@ interface SafeReq {
 export default function SetImpl() {
     const [isSettingUp, setIsSettingUp] = useState(false);
     const [isExecutingTransaction, setIsExecutingTransaction] = useState(false);
+    const [setupHash, setSetupHash] = useState('');
+    const [transactionHash, setTransactionHash] = useState('');
 
     const setup = async () => {
         setIsSettingUp(true);
         try {
-            await walletClient.writeContract({
+            const setupHash = await walletClient.writeContract({
                 address: erc7546Proxy,
                 abi: SafeAbi,
                 functionName: 'setup',
                 args: [[account.address], BigInt(1), zeroAddress, "0x", zeroAddress, zeroAddress, BigInt(0), zeroAddress]
             });
+            setSetupHash(setupHash);
         } catch (error) {
             console.error("An error occurred during the setup process:", error);
         }
@@ -104,23 +107,25 @@ export default function SetImpl() {
                 functionName: 'execTransaction',
                 args: [to, value, data, operation, safeTxGas, baseGas, gasPrice, gasToken, refundReceiver, packedSignature]
             });
-            console.log(txH);
+            setTransactionHash(txH);
         } catch (error) {
             console.error("An error occurred during the transaction execution:", error);
         }
-
+        setIsExecutingTransaction(false);
     };
 
     return (
         <>
-            <h1>Light Account Implementation Setup</h1>
+            <h1>Safe Setup</h1>
             <button onClick={setup} disabled={isSettingUp}>
-                {isSettingUp ? 'Setting up...' : 'Setup Light Account'}
+                {isSettingUp ? 'Setting up...' : 'Setup Safe'}
             </button>
+            {setupHash && <p>Setup Hash: {setupHash}</p>}
 
             <button onClick={execTransaction} disabled={isExecutingTransaction}>
                 {isExecutingTransaction ? 'Executing...' : 'Execute Transaction'}
             </button>
+            {transactionHash && <p>Transaction Hash: {transactionHash}</p>}
         </>
     );
 }

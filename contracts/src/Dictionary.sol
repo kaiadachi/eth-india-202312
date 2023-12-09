@@ -53,14 +53,17 @@ contract Dictionary is IDictionary {
         // Add the pair of functionSelector and implementation address to the mapping.
         implementations[functionSelector] = implementation;
 
-
-
         // Notify the change of the mapping.
         emit ImplementationUpgraded(functionSelector, implementation);
     }
 
     function deleteImplementation(bytes4 functionSelector) external onlyAdmin {
         delete implementations[functionSelector];
+        for (uint i; i < functionSelectorList.length; ++i) {
+            if (functionSelector == functionSelectorList[i]) {
+                delete functionSelectorList[i];
+            }
+        }
         emit ImplementationUpgraded(functionSelector, address(0));
     }
 
