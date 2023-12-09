@@ -9,4 +9,3 @@ forge verify-contract \
 --constructor-args $(cast abi-encode "constructor(address)" 0xB31499445F1cC556a66cdeeF2fd56766D03abA00) \
 --etherscan-api-key $SCROLL_API_KEY \
 0xf80c1D36a5A9621f883940A13fCFCe1d6336580A \
-src/Dictionary.sol:Dictionary
