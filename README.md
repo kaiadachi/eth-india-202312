@@ -9,7 +9,7 @@ entryPoint: 0xB31499445F1cC556a66cdeeF2fd56766D03abA00
 dictionary: 0xf173311fdE0F3e41C64A394446Aaeeca5802852a
 safeImpl: 0x3CBA306E0e91f5d2FB5690Dd44ac3c363FB50582
 
-demo: 
+demo: https://youtu.be/_Dj2s6zKXJo
 
 ## Deployed on base goerli testnet
 erc7546Proxy: 0x155104a4bbfdc87AD7cb2f8fFC5B6d1a4D416F07
