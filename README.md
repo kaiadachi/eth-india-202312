@@ -2,6 +2,9 @@
 Multi Tenant Account is a contract wallet with upgradability that combines BEAKON PROXY and DIAMOND STANDARD at the same time.
 For details, please refer to the PDF file.
 
+日本語解説記事
+https://zenn.dev/adachi_standard/articles/883ff4e4d81608
+
 ## Deployed on scroll sepolia testnet
 erc7546Proxy: 0x2D5473A145ce4e732a8bcDF02600Ae6a5f961e29  
 lightAccountImpl: 0xf80c1D36a5A9621f883940A13fCFCe1d6336580A  
